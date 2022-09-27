@@ -1,4 +1,4 @@
-ame = "esbuild-do"
+name = "esbuild-do"
 route = { pattern = "*/*", zone_name = "esbuild.do" }
 main = "worker.js"
 compatibility_date = "2022-08-25"
