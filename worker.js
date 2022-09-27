@@ -18,6 +18,6 @@ export default {
   fetch: async (req, env) => {
     const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await env.CTX.fetch(req).then(res => res.json())
     if (pathname == '/api') return new Response(JSON.stringify({api,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
-    return fetch('https://esb.denoflare.dev/https://' + pathname + search)
+    return fetch('https://esb.denoflare.dev/https:/' + pathname + search)
   },
 }
