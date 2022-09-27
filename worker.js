@@ -16,13 +16,8 @@ export const api = {
 
 export default {
   fetch: async (req, env) => {
-    const { hostname, pathname, search } = new URL(req.url)
-    if (pathname == '/api') return new Response(JSON.stringify({api}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
-    const [args, ...rest] = pathname.split('/')
-    const token = `${hostname}/${args}`
-    const url = req.url.replace(`${hostname}/${args}`,'')
-    const data = await fetch(url, req).then(res => res.json()).catch(({ name, message }) => ({ error: { name, message }}))
-    const pluckedData = map(data, [...args.split(',')])
-    return new Response(JSON.stringify({url,token,data,pluckedData}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
+    const { user, origin, requestId, method, body, time, pathname, pathSegments, pathOptions, url, query, search, hash } = await env.CTX.fetch(req).then(res => res.json())
+    if (pathname == '/api') return new Response(JSON.stringify({api,user}, null, 2), { headers: { 'content-type': 'application/json; charset=utf-8' }})
+    return fetch('https://esb.denoflare.dev/https://' + pathname + search)
   },
 }
